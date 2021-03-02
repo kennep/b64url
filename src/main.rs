@@ -16,7 +16,7 @@ struct Cli {
 
 fn encode<T: AsRef<[u8]>>(input: T) -> Vec<u8> {
     let result = base64::encode_config(input, base64::URL_SAFE_NO_PAD);
-    return result.as_bytes().to_vec();
+    result.as_bytes().to_vec()
 }
 
 fn decode<T: AsRef<[u8]>>(input: T) -> io::Result<Vec<u8>> {
@@ -29,7 +29,7 @@ fn decode<T: AsRef<[u8]>>(input: T) -> io::Result<Vec<u8>> {
 
 fn main() -> io::Result<()> {
     let mut opt = Cli::from_args();
-    if opt.decode == false && opt.encode == false {
+    if !opt.decode && !opt.encode {
         opt.encode = true;
     }
     if opt.decode && opt.encode {
@@ -64,7 +64,7 @@ fn main() -> io::Result<()> {
             Ok(result) => io::stdout()
                 .write_all(&result)
                 .and_then(|_| io::stdout().write_all(b"\n")),
-            Err(e) => return Err(Error::new(ErrorKind::Other, e.to_string())),
+            Err(e) => Err(Error::new(ErrorKind::Other, e.to_string())),
         }
     } else {
         io::stdout()
