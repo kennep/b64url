@@ -23,8 +23,8 @@ fn decode<T: AsRef<[u8]>>(input: T) -> io::Result<Vec<u8>> {
     let inputstr = std::str::from_utf8(input.as_ref())
         .map_err(|e| Error::new(ErrorKind::InvalidData, e.to_string()))?;
 
-    return base64::decode_config(inputstr, base64::URL_SAFE_NO_PAD)
-        .map_err(|e| Error::new(ErrorKind::Other, e.to_string()));
+    base64::decode_config(inputstr, base64::URL_SAFE_NO_PAD)
+        .map_err(|e| Error::new(ErrorKind::Other, e.to_string()))
 }
 
 fn main() -> io::Result<()> {
@@ -62,15 +62,15 @@ fn main() -> io::Result<()> {
     if opt.decode {
         match decode(buffer) {
             Ok(result) => {
-                return io::stdout()
+                io::stdout()
                     .write_all(&result)
                     .and_then(|_| io::stdout().write_all(b"\n"))
             }
             Err(e) => return Err(Error::new(ErrorKind::Other, e.to_string())),
         }
     } else {
-        return io::stdout()
+        io::stdout()
             .write_all(&encode(buffer))
-            .and_then(|_| io::stdout().write_all(b"\n"));
+            .and_then(|_| io::stdout().write_all(b"\n"))
     }
 }
