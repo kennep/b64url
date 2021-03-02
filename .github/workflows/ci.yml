@@ -130,7 +130,7 @@ jobs:
           args: --all --release
 
       - name: Rename binary
-        run: ren target/release/b64url.exe target/release/b64url_windows_amd64.exe
+        run: ren target/release/b64url.exe b64url_windows_amd64.exe
 
       - name: Release
         uses: softprops/action-gh-release@b21b43df682dab285bf5146c1955e7f3560805f8
