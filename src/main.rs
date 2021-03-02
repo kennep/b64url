@@ -61,11 +61,9 @@ fn main() -> io::Result<()> {
 
     if opt.decode {
         match decode(buffer) {
-            Ok(result) => {
-                io::stdout()
-                    .write_all(&result)
-                    .and_then(|_| io::stdout().write_all(b"\n"))
-            }
+            Ok(result) => io::stdout()
+                .write_all(&result)
+                .and_then(|_| io::stdout().write_all(b"\n")),
             Err(e) => return Err(Error::new(ErrorKind::Other, e.to_string())),
         }
     } else {
