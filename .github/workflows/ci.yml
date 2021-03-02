@@ -4,7 +4,7 @@
 
 on: [push, pull_request]
 
-name: Quickstart
+name: CI
 
 jobs:
   check:
@@ -75,6 +75,7 @@ jobs:
   release_linux:
     name: Release (Linux)
     runs-on: ubuntu-latest
+    needs: [check, tests, lints]
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
