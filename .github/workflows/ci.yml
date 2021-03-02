@@ -71,3 +71,27 @@ jobs:
         with:
           command: clippy
           args: -- -D warnings
+
+  release_linux:
+    name: Release (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+
+      - name: Run cargo build
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
+        with:
+          command: build
+          args: --all --release
+
+      - name: Strip and rename binary
+        run: strip target/release/b64url && mv target/release/b64url target/release/b64url_linux_amd64
