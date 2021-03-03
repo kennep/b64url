@@ -2,6 +2,8 @@
 
 This is a simple URL-safe Base64 encoder/decoder written in Rust.
 
+![Build status](https://github.com/kennep/b64url/actions/workflows/ci.yml/badge.svg)
+
 ## Download 
 
 Pre-compiled binaries for Linux, Windows and (Intel) macOS are available on the
