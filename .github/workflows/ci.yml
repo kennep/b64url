@@ -2,7 +2,13 @@
 #
 # for simplicity we are compiling and testing everything on the Ubuntu environment only.
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
 
 name: CI
 
