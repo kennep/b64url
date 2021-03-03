@@ -2,6 +2,20 @@
 
 This is a simple URL-safe Base64 encoder/decoder written in Rust.
 
+## Download 
+
+Pre-compiled binaries for Linux, Windows and (Intel) macOS are available on the
+[releases](https://github.com/kennep/b64url/releases/latest) page.
+
+## Building
+
+If you have Rust and Cargo installed, you can download the source and build it yourself
+in the regular way:
+
+```bash
+$ cargo build
+```
+
 ## Usage
 
 It is designed to be used as a filter and reads the data to be encoded or decoded from standard input.
@@ -21,12 +35,6 @@ How appropriate. You fight like a cow!
 ```
 
 The default, if neither `-e` nor `-d` is given, is to encode the input.
-
-## Building
-
-```bash
-$ cargo build
-```
 
 ## Feedback
 
