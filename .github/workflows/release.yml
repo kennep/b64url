@@ -90,7 +90,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release_macos:
-    name: Release (MacOS)
+    name: Release (macOS)
     runs-on: macos-latest
     steps:
       - name: Checkout sources

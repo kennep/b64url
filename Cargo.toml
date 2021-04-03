@@ -1,11 +1,11 @@
 [package]
 name = "b64url"
-version = "0.1.0"
+version = "0.1.1"
 description = "Command line URL-safe Base-64 encoder/decoder"
 authors = ["Kenneth Wang Pedersen <kenneth@wangpedersen.com>"]
 edition = "2018"
 repository = "https://github.com/kennep/b64url/"
-license-file = "LICENSE"
+license = "MIT"
 categories = ["command-line-utilities"]
 
 [dependencies]
