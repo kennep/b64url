@@ -11,11 +11,15 @@ jobs:
     name: Publish on crates.io
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
       - name: Run cargo login
         uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
         with:
           command: login
           args: "{{secrets.CARGO_TOKEN}}"
+ 
       - name: Run cargo publish
         uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
         with:
@@ -86,7 +90,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release_macos:
-    name: Release (Linux)
+    name: Release (MacOS)
     runs-on: macos-latest
     steps:
       - name: Checkout sources
