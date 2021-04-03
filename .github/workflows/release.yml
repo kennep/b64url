@@ -7,6 +7,20 @@ on:
 name: Release
 
 jobs:
+  crate_publish:
+    name: Publish on crates.io
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run cargo login
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
+        with:
+          command: login
+          args: {{secrets.CARGO_TOKEN}}
+      - name: Run cargo publish
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505
+        with:
+          command: publish
+
   release_linux:
     name: Release (Linux)
     runs-on: ubuntu-latest
