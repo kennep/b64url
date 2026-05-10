@@ -24,7 +24,7 @@ fn decode<T: AsRef<[u8]>>(input: T) -> io::Result<Vec<u8>> {
         .map_err(|e| Error::new(ErrorKind::InvalidData, e.to_string()))?;
 
     base64::decode_config(inputstr, base64::URL_SAFE_NO_PAD)
-        .map_err(|e| Error::new(ErrorKind::Other, e.to_string()))
+        .map_err(|e| Error::other(e.to_string()))
 }
 
 fn main() -> io::Result<()> {
@@ -37,12 +37,11 @@ fn main() -> io::Result<()> {
         eprintln!("\n"); // print_help does not print a trailing newline.
         match result {
             Ok(_) => {
-                return Err(Error::new(
-                    ErrorKind::Other,
+                return Err(Error::other(
                     "Cannot use --encode and --decode at the same time!",
                 ))
             }
-            Err(e) => return Err(Error::new(ErrorKind::Other, e.to_string())),
+            Err(e) => return Err(Error::other(e.to_string())),
         }
     }
 
@@ -64,7 +63,7 @@ fn main() -> io::Result<()> {
             Ok(result) => io::stdout()
                 .write_all(&result)
                 .and_then(|_| io::stdout().write_all(b"\n")),
-            Err(e) => Err(Error::new(ErrorKind::Other, e.to_string())),
+            Err(e) => Err(Error::other(e.to_string())),
         }
     } else {
         io::stdout()
